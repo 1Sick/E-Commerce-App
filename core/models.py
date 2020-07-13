@@ -9,9 +9,12 @@ from djecom.utils import unique_slug_generator
 
 
 CATEGORY_CHOICES = (
-    ('S', 'Shirt'),
-    ('SW', 'Sport wear'),
-    ('OW', 'Outwear')
+    ('W01', '쿠폰/할인권'),
+    ('W02', '전단/종이자석'),
+    ('W03', '메뉴북/케이스'),
+    ('W04', '포스터/POP'),
+    ('W05', '현수막/PET류'),
+    ('W06', '배너/에어간판')
 )
 
 LABEL_CHOICES = (
@@ -44,15 +47,22 @@ class Post(models.Model):
 class Item(models.Model):
 
     title = models.CharField(max_length=100)
-    price = models.FloatField()
-    discount_price = models.FloatField(blank=True, null=True)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    price = models.IntegerField()
+    discount_price = models.IntegerField(blank=True, null=True)
+    category = models.CharField(choices=CATEGORY_CHOICES, max_length=5)
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     availabily = models.CharField(
         choices=AVAILABILITY_PRODUCT, max_length=1, blank=True, null=True)
     slug = models.SlugField(blank=True, null=True)
     description = models.TextField()
-    image = models.ImageField()
+    image1 = models.ImageField()
+    image2 = models.ImageField(blank=True, null=True)
+    image3 = models.ImageField(blank=True, null=True)
+    detail1 = models.ImageField()
+    detail2 = models.ImageField(blank=True, null=True)
+    detail3 = models.ImageField(blank=True, null=True)
+    detail4 = models.ImageField(blank=True, null=True)
+
 
     def __str__(self):
         return self.title

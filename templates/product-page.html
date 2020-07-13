@@ -1,7 +1,136 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
+<!-- Header Area-->
+{% include 'shared/header.html' %}
 
-{% block maincontent%}
+<div class="page-content-wrapper">
+  <!-- Product Slides-->
+  <div class="product-slides owl-carousel">
+    <!-- Single Hero Slide-->
+    {% if object.image1 %}
+    <div class="single-product-slide"><img src="{{ object.image1.url }}" alt=""></div>
+    {% endif %}
+    {% if object.image2 %}
+    <div class="single-product-slide"><img src="{{ object.image2.url }}" alt=""></div>
+    {% endif %}
+    {% if object.image3 %}
+    <div class="single-product-slide"><img src="{{ object.image3.url }}" alt=""></div>
+    {% endif %}
+  </div>
+  <div class="product-description pb-3">
+    <!-- Product Title & Meta Data-->
+    <div class="product-title-meta-data bg-white mb-3 py-3">
+      <div class="container d-flex justify-content-between">
+        <div class="p-title-price">
+            <h6 class="mb-1">{{ object.title }}</h6>
+            {% if object.discount_price %}
+            <p class="sale-price mb-0">{{ object.discount_price }}원<span>{{ object.price }}원</span></p>
+            {% else %}
+            <span>{{ object.price }}원</span>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    <!-- Product Specification-->
+    <div class="p-specification bg-white mb-3 py-3">
+      <div class="container">
+        <h6>상품 상세</h6>
+        {% if object.detail1 %}
+        <img src="{{ object.detail1.url }}" alt="">
+        {% endif %}
+        {% if object.detail2 %}
+        <img src="{{ object.detail2.url }}" alt="">
+        {% endif %}
+        {% if object.detail3 %}
+        <img src="{{ object.detail3.url }}" alt="">
+        {% endif %}
+        {% if object.detail4 %}
+        <img src="{{ object.detail4.url }}" alt="">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-nav-area" id="footerNav">
+  <div class="suha-footer-nav h-100">
+    <ul class="h-100 d-flex align-items-center justify-content-around">
+
+      <li><button class="btn btn-info btn-block w-100" data-toggle="modal" data-target="#myModal" type="submit">구매하기</button></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-fullsize" role="document">
+    <div class="modal-content modal-fullsize animate-bottom">
+      <div class="modal-body">
+        <div class="col-12">
+          <div class="card weekly-product-card mb-3">
+            <div class="card-body d-flex align-items-center">
+              <div class="product-thumbnail-side"><img src="{{ object.image1.url }}" alt=""></div>
+              <div class="product-description">
+                <p class="product-title d-block" href="#">{{ object.title }}</p>
+                <p class="sale-price"><i class="lni-dollar"></i>{{ object.price }}원</span></p>
+              </div>
+            </div>
+            <!-- Add To Cart-->
+            <div class="cart-form-wrapper bg-white mb-3 py-3">
+              <div class="container">
+                <form class="cart-form" action="#" method="post">
+                  <input class="form-control" type="text" id="qty2" step="1" min="1" max="12" name="quantity" value="1"><a class="btn btn-danger mr-2" href="#">Buy Now</a>
+                  <button class="btn btn-warning" type="submit">Add to cart</button>
+                </form>
+              </div>
+            </div>
+            <!-- Selection Panel-->
+            <div class="selection-panel bg-white mb-3 py-3">
+              <div class="container d-flex align-items-center justify-content-between">
+                <!-- Choose Color-->
+                <div class="choose-color-wrapper">
+                  <p class="mb-0">Color</p>
+                  <div class="choose-color-radio d-flex align-items-center">
+                    <div class="custom-control custom-radio mr-1">
+                      <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked>
+                      <label class="custom-control-label primary" for="customRadio1"></label>
+                    </div>
+                    <div class="custom-control custom-radio mr-1">
+                      <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
+                      <label class="custom-control-label yellow" for="customRadio2"></label>
+                    </div>
+                    <div class="custom-control custom-radio mr-1">
+                      <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio">
+                      <label class="custom-control-label purple" for="customRadio3"></label>
+                    </div>
+                    <div class="custom-control custom-radio mr-1">
+                      <input class="custom-control-input" type="radio" id="customRadio4" name="customRadio">
+                      <label class="custom-control-label green" for="customRadio4"></label>
+                    </div>
+                  </div>
+                </div>
+                <!-- Choose Size-->
+                <div class="choose-size-wrapper text-right">
+                  <p class="mb-0">Size</p>
+                  <ul class="mb-0 choose-size-radio d-flex align-items-center">
+                    <li><a href="#">S</a></li>
+                    <li class="active"><a href="#">M</a></li>
+                    <li><a href="#">L</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--Main layout-->
 <main class="mt-5 pt-4">
@@ -13,7 +142,7 @@
             <!--Grid column-->
             <div class="col-md-6 mb-4">
 
-                <img src="{{ object.image.url }}" class="img-fluid" alt="">
+                <img src="{{ object.image1.url }}" class="img-fluid" alt="">
 
             </div>
             <!--Grid column-->

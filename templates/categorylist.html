@@ -1,126 +1,55 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block content %}
 
-{% block maincontent %}
+<!-- Header Area-->
+{% include 'shared/header.html' %}
 
-  <!--Main layout-->
-  <main>
+<div class="page-content-wrapper">
+  <!-- Catagory Single Image-->
+  <div class="catagory-single-img"><img class="w-100" src="{% static 'img/bg-img/5' %}.jpg" alt=""></div>
+  <!-- Top Products-->
+  <div class="top-products-area mt-3">
     <div class="container">
-
-{% include 'navbar.html' %}
-
-      <!--Section: Products v.3-->
-      <section class="text-center mb-4">
-
-        <!--Grid row-->
-        <div class="row wow fadeIn">
-
-
-
-          {% for item in object_list %}
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-
-
-                <img src="{{ item.image.url }}" class="card-img-top"
-                  alt="">
-                <a href="{% url 'product-detail' item.slug %}" target="blank">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
+      <div class="section-heading d-flex align-items-center justify-content-between">
+        <h6 class="ml-1">Sub Catagory Products</h6>
+      </div>
+      <div class="row">
+        <!-- Single Weekly Product Card-->
+        {% for item in object_list %}
+        <div class="col-12">
+          <div class="card weekly-product-card mb-3">
+            <div class="card-body d-flex align-items-center">
+              <div class="product-thumbnail-side">
+                {% if item.discount_price %}
+                <span class="badge badge-danger">-{{item.price|sub:item.discount_price}}원</span>
+                <a class="product-thumbnail d-block" href="{% url 'product-detail' item.slug %}"><img src="{{ item.image1.url }}" alt=""></a>
+                {% else %}
+                <a class="product-thumbnail d-block" href="{% url 'product-detail' item.slug %}"><img src="{{ item.image1.url }}" alt=""></a>
+                {% endif %}
               </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5> {{ item.get_category_display  }}  </h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="{% url 'product-detail' item.slug %}" target="blank" class="dark-grey-text">{{ item.title }}
-                      <span class="badge badge-pill {{item.get_label_display}}-color">NEW</span>
-
-                    </a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>
-                    {% if item.discount_price %}
-
-                      {{ item.discount_price  }}
-
-                    {%else %}
-
-                  {{ item.price  }}
-
-                    {% endif %}
-
-                </strong>
-                </h4>
-
+              <div class="product-description"><a class="product-title d-block" href="#">{{ item.title }}</a>
+                <p class="sale-price"><i class="lni-dollar"></i>
+                  {% if item.discount_price %}
+                    {{ item.discount_price }}원
+                  <span>{{item.price}}</span>
+                  {%else %}
+                    {{ item.price }}원
+                  {% endif %}
+                </p>
+                <a class="btn btn-success btn-sm add2cart-notify" href="{% url 'product-detail' item.slug %}"><i class="mr-1 lni-cart"></i>Buy</a>
               </div>
-              <!--Card content-->
-
             </div>
-            <!--Card-->
-
           </div>
-          {%  endfor %}
-
-
-
         </div>
-        <!--Grid row-->
-
-
-
-      </section>
-      <!--Section: Products v.3-->
-
-      {% if is_paginated %}
-      <nav class="d-flex justify-content-center wow fadeIn">
-        <ul class="pagination pg-blue">
-
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          {% endif %}
-
-          <li class="page-item active">
-            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-
-          {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
-      {% endif %}
-
+        {% endfor %}
+      </div>
     </div>
-  </main>
-  <!--Main layout-->
+  </div>
+</div>
 
-
-{% endblock maincontent %}
-
+{% endblock %}
 
 
 

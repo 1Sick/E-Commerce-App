@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="header-area" id="headerArea">
+  <div class="container h-100 d-flex align-items-center justify-content-between">
+    <!-- Navbar Toggler-->
+    <div class="suha-navbar-toggler d-flex justify-content-between flex-wrap" id="suhaNavbarToggler"><span></span><span></span><span></span></div>
+    <!-- Logo Wrapper-->
+<!--    <div class="logo-wrapper"><a href="{% url 'home' %}"><img src="{% static 'img/core-img/logo-small.png' %}" alt=""></a></div>-->
+    <div class="logo-wrapper"><a href="{% url 'home' %}"><img src="{% static 'img/bg-img/top_logo.png' %}" alt=""></a></div>
+    <div class="suha-footer-nav h-100">
+    <ul class="h-100 d-flex align-items-center justify-content-between">
+      <li><a href="#"><i class="fa fa-shopping-cart"></i>Cart</a></li>
+    </ul>
+    </div>
+    <!-- Page Title-->
+<!--    <div class="page-heading">-->
+<!--      <h6 class="mb-0">Home</h6>-->
+<!--    </div>-->
+
+  </div>
+</div>
+<!-- Sidenav Black Overlay-->
+<div class="sidenav-black-overlay"></div>
+<!-- Side Nav Wrapper-->
+<div class="suha-sidenav-wrapper" id="sidenavWrapper">
+  <!-- Sidenav Profile-->
+  <div class="sidenav-profile">
+    <div class="user-profile"><img src="{% static 'img/bg-img/9.jpg' %}" alt=""></div>
+    <div class="user-info">
+      <h6 class="user-name mb-0">Suha Jannat</h6>
+      <p class="available-balance">Balance <span>$<span class="counter">379.23</span></span></p>
+    </div>
+  </div>
+  <!-- Sidenav Nav-->
+  <ul class="sidenav-nav">
+    <li><a href="#"><i class="lni-user"></i>My Profile</a></li>
+    <li><a href="#"><i class="lni-cart"></i>Cart<span class="ml-3 badge badge-warning">3</span></a></li>
+    <li><a href="#"><i class="lni-power-switch"></i>Sign Out</a></li>
+  </ul>
+  <!-- Go Back Button-->
+  <div class="go-home-btn" id="goHomeBtn"><i class="lni-arrow-left"></i></div>
+</div>
