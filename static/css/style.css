@@ -1822,6 +1822,19 @@ textarea:invalid {
         .cart-table table a.remove-product:hover, .cart-table table a.remove-product:focus {
           color: #ffffff;
           background-color: #020310; }
+      .cart-table table a.change-product {
+        color: #ffffff;
+        width: 24px;
+        height: 24px;
+        background-color: #100DD1;
+        display: inline-block;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 50%;
+        font-size: 10px; }
+        .cart-table table a.remove-product:hover, .cart-table table a.remove-product:focus {
+          color: #ffffff;
+          background-color: #020310; }
       .cart-table table a span {
         display: block;
         color: #747794; }
@@ -1838,7 +1851,6 @@ textarea:invalid {
     max-width: 2.5rem;
     border: 1px solid #ebebeb; }
   .cart-table .qty-text {
-    border: 1px solid #ebebeb;
     width: 2.5rem;
     text-align: center;
     height: 2rem;

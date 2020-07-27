@@ -1,82 +1,72 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-  <main>
-    <div class="container">
 
-    <div class="table-responsive text-nowrap">
-    <h2>Order Summary</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Item title</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Total Item Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for order_item in object.items.all %}
-        <tr>
-            <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ order_item.item.title }}</td>
-            <td>{{ order_item.item.price }}</td>
-            <td>
-                <a href="{%  url 'remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>
-                {{ order_item.quantity }}
-                <a href="{% url 'add-to-cart' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a>
-            </td>
-            <td>
-            {% if order_item.item.discount_price %}
-                ${{ order_item.get_total_discount_item_price }}
-                <span class="badge badge-primary">Saving ${{ order_item.get_amount_saved }}</span>
-            {% else %}
-                ${{ order_item.get_total_item_price }}
-            {% endif %}
-            <a style='color: red;' href="{% url 'remove-from-cart' order_item.item.slug %}">
-                <i class="fas fa-trash float-right"></i>
-            </a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan='5'>Your cart is empty</td>
-        </tr>
-        <tr>
-            <td colspan="5">
-            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
-            </td>
-        </tr>
+<!-- Header Area-->
+{% include 'shared/header.html' %}
 
-        {% endfor %}
-
-        {% if object.coupon %}
-        <tr>
-            <td colspan="4"><b>Coupon</b></td>
-            <td><b>-${{ object.coupon.amount }}</b></td>
-        </tr>
-        {% endif %}
-        {% if object.get_total %}
-        <tr>
-            <td colspan="4"><b>Order Total</b></td>
-            <td><b>${{ object.get_total }}</b></td>
-        </tr>
-        <tr>
-            <td colspan="5">
-            <a class='btn btn-warning float-right ml-2' href='/checkout/'>Proceed to checkout</a>
-            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
-            </td>
-        </tr>
-        {% endif %}
-        </tbody>
-    </table>
-
+<div class="page-content-wrapper">
+  <div class="container">
+    <!-- Cart Wrapper-->
+    <div class="cart-wrapper-area py-3">
+      <div class="cart-table card mb-3">
+        <div class="table-responsive card-body">
+          <table class="table mb-0">
+            <tbody>
+            {% for order_item in object.items.all %}
+              <tr>
+                <th scope="row"><a class="remove-product" href="{% url 'remove-from-cart' order_item.item.slug %}"><i class="lni-close"></i></a></th>
+                <td><img src="{{ order_item.item.image1.url }}" alt=""></td>
+                <td>
+                    <a href="single-product.html">{{ order_item.item.title }}
+                        {% if order_item.item.discount_price %}
+                        <span>{{ order_item.item.discount_price }}원</span>
+                        {% else %}
+                        <span>{{ order_item.item.price }}원</span>
+                        {% endif %}
+                    </a>
+                </td>
+                <td>
+                  <div class="quantity">
+                      <a class="change-product" href="{% url 'add-to-cart' order_item.item.slug %}"><i class="lni-plus"></i></a>
+                      <span class="qty-text">{{ order_item.quantity }}</span>
+                      <a class="change-product" href="{% url 'remove-single-item-from-cart' order_item.item.slug %}"><i class="lni-minus"></i></a>
+                  </div>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                  <span>장바구니가 비었습니다.</span>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Coupon Area-->
+<!--      <div class="card coupon-card mb-3">-->
+<!--        <div class="card-body">-->
+<!--          <div class="apply-coupon">-->
+<!--            <h6 class="mb-0">Have a coupon?</h6>-->
+<!--            <p class="mb-2">Enter your coupon code here &amp; get awesome discounts!</p>-->
+<!--            <div class="coupon-form">-->
+<!--              <form action="#">-->
+<!--                <input class="form-control" type="text" placeholder="SUHA30">-->
+<!--                <button class="btn btn-primary" type="submit">Apply</button>-->
+<!--              </form>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+      <!-- Cart Amount Area-->
+      {% if object.get_total %}
+      <div class="card cart-amount-area">
+        <div class="card-body d-flex align-items-center justify-content-between">
+          <h5 class="total-price mb-0">{{ object.get_total }}원</h5><a class="btn btn-warning" href="/checkout/">결제하기</a>
+        </div>
+      </div>
+      {% endif %}
     </div>
-
-    </div>
-  </main>
-
-{% endblock content %}
-
-
+  </div>
+</div>
+{% endblock %}

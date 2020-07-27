@@ -29,13 +29,11 @@ stripe.api_key = 'sk_test_YvRLxFpoheL9o83dVzvHJUKP00TXosKCun'
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
-
 def home(request):
     context = {
         'items': Item.objects.all()
     }
     return render(request, "home.html", context)
-
 
 class HomeView(ListView):
     model = Item
@@ -45,8 +43,9 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['posts'] = Post.objects.all()
-        context['object_list'] = Item.objects.all()
+        context['object_list'] = Item.objects.all()[:5]
         # And so on for more models
+        context['userinfo'] = self.request.user
         return context
 
 
@@ -71,7 +70,6 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
             context = {
                 'object': order,
-
             }
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
@@ -538,3 +536,11 @@ class ProfileView(View):
 
         }
         return render(self.request, "profilepage.html", context)
+
+class EditProfileView(View):
+    def get(self, *args, **kwargs):
+
+        context = {
+            "userinfo": self.request.user,
+        }
+        return render(self.request, "edit-profile.html", context)

@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'ecommerce',
         'USER': 'root',
         'PASSWORD': 'dnjstlr!',
-        'HOST': '60.60.0.17',
+        'HOST': '192.168.0.10',
         'PORT': '3306'
     }
 }

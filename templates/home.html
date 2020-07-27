@@ -10,44 +10,27 @@
   <!-- Hero Slides-->
   <div class="hero-slides owl-carousel">
     <!-- Single Hero Slide-->
+    {% for slider in posts %}
     <div class="single-hero-slide">
-      <div class="slide-img"><img src="{% static 'img/bg-img/1.jpg' %}" alt=""></div>
+      <div class="slide-img">
+        <img src="{{ slider.image.url }}" alt=""></div>
       <div class="slide-content h-100 d-flex align-items-center">
         <div class="container">
-          <h4 class="text-white mb-0" data-animation="fadeInUp" data-delay="100ms" data-wow-duration="1000ms">Amazon Echo</h4>
-          <p class="text-white" data-animation="fadeInUp" data-delay="400ms" data-wow-duration="1000ms">3rd Generation, Charcoal</p><a class="btn btn-primary btn-sm" href="#" data-animation="fadeInUp" data-delay="800ms" data-wow-duration="1000ms">Buy Now</a>
+          <h4 class="text-white mb-0" data-animation="fadeInUp" data-delay="100ms" data-wow-duration="1000ms">{{ slider.title1 }}</h4>
+          <p class="text-white" data-animation="fadeInUp" data-delay="400ms" data-wow-duration="1000ms">{{ slider.description }}</p><a class="btn btn-primary btn-sm" href="{{ slider.title2 }}" data-animation="fadeInUp" data-delay="800ms" data-wow-duration="1000ms">구매하기</a>
         </div>
       </div>
     </div>
-    <!-- Single Hero Slide-->
-    <div class="single-hero-slide">
-      <div class="slide-img"><img src="{% static 'img/bg-img/2.jpg' %}" alt=""></div>
-      <div class="slide-content h-100 d-flex align-items-center">
-        <div class="container">
-          <h4 class="text-white mb-0" data-animation="fadeInUp" data-delay="100ms" data-wow-duration="1000ms">Light Candle</h4>
-          <p class="text-white" data-animation="fadeInUp" data-delay="400ms" data-wow-duration="1000ms">Now only $22</p><a class="btn btn-success btn-sm" href="#" data-animation="fadeInUp" data-delay="500ms" data-wow-duration="1000ms">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    <!-- Single Hero Slide-->
-    <div class="single-hero-slide">
-      <div class="slide-img"><img src="{% static 'img/bg-img/3.jpg' %}" alt=""></div>
-      <div class="slide-content h-100 d-flex align-items-center">
-        <div class="container">
-          <h4 class="mb-0 text-dark" data-animation="fadeInUp" data-delay="100ms" data-wow-duration="1000ms">Best Furniture</h4>
-          <p data-animation="fadeInUp" data-delay="400ms" data-wow-duration="1000ms">3 years warranty</p><a class="btn btn-danger btn-sm" href="#" data-animation="fadeInUp" data-delay="800ms" data-wow-duration="1000ms">Buy Now</a>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
   <!-- Product Catagories-->
   <div class="product-catagories-wrapper pt-3">
     <div class="container">
       <div class="product-catagories-wrapper pt-3">
         <div class="container">
-          <div class="section-heading">
-            <h6 class="ml-1">Product Category</h6>
-          </div>
+<!--          <div class="section-heading">-->
+<!--            <h6 class="ml-1">Product Category</h6>-->
+<!--          </div>-->
           <div class="product-catagory-wrap">
             <div class="row">
               <div class="col-4">
@@ -90,7 +73,7 @@
   <div class="weekly-best-seller-area pt-3">
     <div class="container">
       <div class="section-heading d-flex align-items-center justify-content-between">
-        <h6 class="pl-1">Weekly Best Sellers</h6><a class="btn btn-success btn-sm" href="#">View All</a>
+        <h6 class="pl-1">신상품</h6><a class="btn btn-success btn-sm" href="#">전체 보기</a>
       </div>
       <div class="row">
         {% for item in object_list %}
@@ -115,7 +98,7 @@
                     {{ item.price }}원
                   {% endif %}
                 </p>
-                <a class="btn btn-success btn-sm add2cart-notify" href="{% url 'product-detail' item.slug %}"><i class="mr-1 lni-cart"></i>Buy</a>
+                <a class="btn btn-success btn-sm" href="{% url 'product-detail' item.slug %}"><i class="mr-1 lni-cart"></i>구매하기</a>
               </div>
             </div>
           </div>
