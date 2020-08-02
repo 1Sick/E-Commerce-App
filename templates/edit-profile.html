@@ -21,31 +21,32 @@
             </div>
           </div>
           <div class="user-info">
-            <h5 class="mb-0">{{ userinfo.username }}</h5>
+            <h5 class="mb-0">개인 정보 수정</h5>
           </div>
         </div>
       </div>
       <!-- User Meta Data-->
       <div class="card user-data-card">
         <div class="card-body">
-          <form action="#" method="POST">
+          <form action="{% url 'modify-profile' %}" method="POST">
+            {% csrf_token %}
             <div class="form-group">
-              <div class="title mb-2"><i class="lni-user"></i><span>Username</span></div>
-              <input class="form-control" type="text" value="{{ userinfo.username }}">
+              <div class="title mb-2"><i class="lni-user"></i><span>아이디</span></div>
+              <input class="form-control" type="text" name="usernamen" value="{{ user.username }}" disabled>
             </div>
             <div class="form-group">
               <div class="title mb-2"><i class="lni-phone-handset"></i><span>Phone</span></div>
-              <input class="form-control" type="text" value="+880 000 111 222">
+              <input class="form-control" type="text" name="phone" value="{{ userinfo.phone }}">
             </div>
+<!--            <div class="form-group">-->
+<!--              <div class="title mb-2"><i class="lni-envelope"></i><span>Email Address</span></div>-->
+<!--              <input class="form-control" type="email" name="email" value="{{ user.email }}">-->
+<!--            </div>-->
             <div class="form-group">
-              <div class="title mb-2"><i class="lni-envelope"></i><span>Email Address</span></div>
-              <input class="form-control" type="email" value="{{ userinfo.email }}">
+              <div class="title mb-2"><i class="lni-map-marker"></i><span>주소</span></div>
+              <input class="form-control" type="text" name="address" value="{{ userinfo.address }}">
             </div>
-            <div class="form-group">
-              <div class="title mb-2"><i class="lni-map-marker"></i><span>Shipping Address</span></div>
-              <input class="form-control" type="text" value="28/C Green Road, BD">
-            </div>
-            <button class="btn btn-success w-100" type="submit">Save All Changes</button>
+            <button class="btn btn-success w-100" type="submit">변경하기</button>
           </form>
         </div>
       </div>

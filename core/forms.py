@@ -60,3 +60,7 @@ class RefundForm(forms.Form):
         'rows': 4
     }))
     email = forms.EmailField()
+
+class ProfileForm(forms.Form):
+    phone = forms.CharField(required=False)
+    address = forms.CharField(required=False)

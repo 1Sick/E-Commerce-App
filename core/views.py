@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 
-from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
+from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm, ProfileForm
 
 import random
 import string
@@ -541,6 +541,31 @@ class EditProfileView(View):
     def get(self, *args, **kwargs):
 
         context = {
-            "userinfo": self.request.user,
+            "user": self.request.user,
         }
+
+        userinfo = UserProfile.objects.get(
+            user=self.request.user,
+        )
+        context.update({"userinfo": userinfo})
+
         return render(self.request, "edit-profile.html", context)
+
+class ModifyProfile(View):
+    def post(self, *args, **kwargs):
+        form = ProfileForm(self.request.POST)
+        userinfo = UserProfile.objects.get(user=self.request.user)
+
+        try:
+            if form.is_valid():
+                phone = self.request.POST.get("phone")
+                address = self.request.POST.get("address")
+                userinfo.phone = phone
+                userinfo.address = address
+                userinfo.save()
+                email = self.request.POST.get("email")
+                return redirect("edit-profile")
+
+        except ObjectDoesNotExist:
+            messages.info(self.request, "You do not have an active order")
+            return redirect("home")

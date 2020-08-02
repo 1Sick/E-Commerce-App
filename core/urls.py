@@ -14,6 +14,7 @@ from .views import HomeView,\
     RequestRefundView,\
     ProfileView,\
     EditProfileView,\
+    ModifyProfile,\
     product
 from django.contrib.auth import views as auth_views
 
@@ -33,6 +34,7 @@ urlpatterns = [
     path('request-refund/<str:ref_code>', RequestRefundView.as_view(), name='request-refund'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('edit-profile/', EditProfileView.as_view(), name='edit-profile'),
+    path('modify-profile/', ModifyProfile.as_view(), name='modify-profile'),
 ]
 
 # for adding media file settings
