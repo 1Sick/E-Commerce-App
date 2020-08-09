@@ -37,34 +37,47 @@
         </div>
       </div>
       <!-- Shipping Method Choose-->
-      <div class="shipping-method-choose mb-4">
+      <div class="cart-table card mb-3">
         <div class="card shipping-method-choose-title-card bg-success">
           <div class="card-body">
-            <h6 class="text-center mb-0 text-white">Shipping Method Choose</h6>
+            <h6 class="text-center mb-0 text-white">Products List</h6>
           </div>
         </div>
-        <div class="card shipping-method-choose-card">
-          <div class="card-body">
-            <div class="shipping-method-choose">
-              <ul>
-                <li>
-                  <input id="fastShipping" type="radio" name="selector" checked>
-                  <label for="fastShipping">Fast Shipping<span>1 days delivary for $1</span></label>
-                  <div class="check"></div>
-                </li>
-                <li>
-                  <input id="normalShipping" type="radio" name="selector">
-                  <label for="normalShipping">Reguler<span>3-7 days delivary for $0.4</span></label>
-                  <div class="check"></div>
-                </li>
-                <li>
-                  <input id="courier" type="radio" name="selector">
-                  <label for="courier">Courier<span>5-8 days delivary for $0.3</span></label>
-                  <div class="check"></div>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <div class="table-responsive card-body">
+          <table class="table mb-0">
+            <tbody>
+              <tr>
+                <th scope="row"><a class="remove-product" href="#"><i class="lni-close"></i></a></th>
+                <td><img src="{% static 'img/product/5.jpg' %}" alt=""></td>
+                <td><a href="single-product.html">Ciramic Pot Set<span>$12.10 × 1</span></a></td>
+                <td>
+                  <div class="quantity">
+                    <input class="qty-text" type="text" value="1">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><a class="remove-product" href="#"><i class="lni-close"></i></a></th>
+                <td><img src="{% static 'img/product/6.jpg' %}" alt=""></td>
+                <td><a href="single-product.html">Bluetooth Speaker<span>$9.87 × 2</span></a></td>
+                <td>
+                  <div class="quantity">
+                    <input class="qty-text" type="text" value="2">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><a class="remove-product" href="#"><i class="lni-close"></i></a></th>
+                <td><img src="{% static 'img/product/7.jpg' %}" alt=""></td>
+                <td><a href="single-product.html">Modern Gray Tops<span>$7 × 1</span></a></td>
+                <td>
+                  <div class="quantity">
+                    <input class="qty-text" type="text" value="1">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <!-- Cart Amount Area-->
